@@ -1,0 +1,10 @@
+vim.g.mapleader = ' '
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
+vim.keymap.set('n', '<leader>q', '<cmd>quit<cr>')
+vim.keymap.set({'n', 'x'}, 'gy', '"+y')
+vim.keymap.set({'n', 'x'}, 'gp', '"+p')
+-- vim.keymap.set({'n'}, '<leader>z', ':undo<cr>')
+vim.keymap.set({'n'}, '<leader>y', ':redo<cr>')
+vim.keymap.set('n', '<C-a>', ':keepjumps normal! ggVG<cr>')
+-- vim.keymap.set('n', '<space><space>', '<cmd>Lexplore<cr>')
