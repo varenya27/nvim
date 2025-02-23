@@ -1,7 +1,6 @@
 function ColorMyPencils(color)
-	color = color or "everforest"
+	color = "everforest"
 	vim.cmd.colorscheme(color)
-
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
@@ -16,7 +15,7 @@ return {
 			-- directly inside the plugin declaration.
 			vim.g.everforest_enable_italic = true
 			-- vim.cmd.colorscheme('everforest')
-			ColorMyPencils()
+			-- ColorMyPencils()
 		end
 	},
 	{
