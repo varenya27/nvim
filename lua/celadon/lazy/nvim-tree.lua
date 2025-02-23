@@ -16,7 +16,7 @@ return {
 				preserve_window_proportions = true,
 			},
 			renderer = {
-				root_folder_label = false,
+				-- root_folder_label = true,
 				group_empty = true,
 				highlight_git = true,
 				highlight_opened_files = "all",
@@ -38,6 +38,7 @@ return {
 			},
 			vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>",{noremap=true, silent=true}),
 			vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>",{noremap=true, silent=true}),
+			-- vim.keymap.set("n", "<C-CR>", api.tree.change_root_to_node,{noremap=true, silent=true},opts("CD"))
 		})
 	end
 }
