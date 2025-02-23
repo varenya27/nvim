@@ -1,5 +1,6 @@
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+-- vim.keymap.set('n', '<leader>pv', vim.cmd.Vex)
+-- vim.keymap.set('n', '<leader>pl', vim.cmd.Lex)
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>quit<cr>')
 vim.keymap.set({'n', 'x'}, 'gy', '"+y')
