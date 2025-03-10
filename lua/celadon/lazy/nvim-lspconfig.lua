@@ -31,7 +31,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-				"bash-language-server",
+				"bashls",
 				"pyright",
 				"clangd",
                 "rust_analyzer",
