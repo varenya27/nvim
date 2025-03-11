@@ -37,6 +37,11 @@ return {
 				dotfiles = false,
 				custom = {".git"}
 			},
+			git = {
+				enable = true,
+				ignore = false,
+				timeout = 500,
+			},
 
 			-- on_attach = function(bufnr)
 			-- 	local function opts(desc)
