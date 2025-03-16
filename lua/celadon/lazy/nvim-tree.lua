@@ -2,6 +2,7 @@ return {
 	"nvim-tree/nvim-tree.lua",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
+		-- "jefrey-xiao/nvim-ueberzug"
 	},
 	config = function()
 		local api = require("nvim-tree.api")
