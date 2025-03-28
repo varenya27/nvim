@@ -16,3 +16,7 @@ vim.opt.foldlevelstart = 0 -- fold all chunks
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.undodir" -- make the directory first
 vim.opt.termguicolors = true
+vim.opt.smartcase = true
+vim.opt.splitbelow = true
+vim.opt.splitright= true
+
