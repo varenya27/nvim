@@ -70,8 +70,8 @@ return {
 			-- end,
 			--
 
-			vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>",{noremap=true, silent=true}),
-			vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>",{noremap=true, silent=true}),
+			-- vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>",{noremap=true, silent=true}),
+			-- vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>",{noremap=true, silent=true}),
 			-- vim.keymap.set("n", "<leader><CR>", function()
 			-- 	local node = api.tree:get_node_under_cursor()
 			-- 	if  node.name:match("%.(pdf)$") or node.name:match("%.(djvu)$") then
