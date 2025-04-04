@@ -16,12 +16,12 @@ vim.keymap.set('n', '<leader>v', '<cmd>vsplit<cr>')
 vim.keymap.set('n', '<leader>s', '<cmd>split<cr>')
 
 -- move screen
-vim.keymap.set({'n','v'}, '<Up>', '<C-y>')
-vim.keymap.set({'n','v'}, '<Down>', '<C-e>')
+vim.keymap.set({'n','v'}, '<Up>', '3<C-y>')
+vim.keymap.set({'n','v'}, '<Down>', '3<C-e>')
 
 -- toggle window
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
+vim.keymap.set({'n','t'}, "<C-h>", "<C-w>h", { desc = "switch window left" })
+vim.keymap.set({'n','t'}, "<C-l>", "<C-w>l", { desc = "switch window right" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
