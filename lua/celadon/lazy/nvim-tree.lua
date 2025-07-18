@@ -11,7 +11,8 @@ return {
 				sorter = "case_sensitive",
 			},
 			view = {
-				width = 35,
+				adaptive_size=true,
+				-- width = 35,
 				side = "left",
 				number = false,
 				relativenumber = true,
