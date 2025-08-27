@@ -1,4 +1,4 @@
-vim.opt.rnu = true		-- show relative line numbers
+-- vim.opt.rnu = true		-- show relative line numbers
 vim.opt.nu = true		-- show relative line numbers
 vim.opt.mouse = 'a'			-- use mouse in all modes 
 vim.opt.ignorecase = true
