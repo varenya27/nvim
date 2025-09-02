@@ -56,7 +56,7 @@ return {
 				files = {"src/parser.c", "src/scanner.c"},
 				branch = "master",
 			},
-		}
+		},
 
 		vim.treesitter.language.register("templ", "templ")
 	end
