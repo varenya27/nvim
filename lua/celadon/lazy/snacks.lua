@@ -6,14 +6,19 @@ return {
 	opts = {
 		bigfile = { enabled = true },
 		dashboard = { enabled = true },
-		explorer = { enabled = false },
+		explorer = {
+			enabled = false,
+			git = { enabled = false },
+		},
 		indent = { enabled = false },
 		input = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 3000,
 		},
-		picker = { enabled = true },
+		picker = { enabled = true,
+			git = {enabled = false}
+		},
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = false },
@@ -94,7 +99,7 @@ return {
 		{ "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
 		{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-		{ "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+		-- { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
 		{ "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
 		{ "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
 		{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },

@@ -1,11 +1,16 @@
 function ColorMyPencils(color)
-	color = "everforest"
+	color = "gruvbox"
 	vim.cmd.colorscheme(color)
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 return {
+	{
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		priority = 1000,
+	},
 	{
 		'sainnhe/everforest',
 		lazy = false,
@@ -48,7 +53,7 @@ return {
 				invert_tabline = false,
 				invert_intend_guides = false,
 				inverse = true, -- invert background for search, diffs, statuslines and errors
-				contrast = "", -- can be "hard", "soft" or empty string
+				contrast = "hard", -- can be "hard", "soft" or empty string
 				palette_overrides = {},
 				overrides = {},
 				dim_inactive = false,
@@ -92,6 +97,4 @@ return {
 			ColorMyPencils();
 		end
 	},
-
-
 }

@@ -8,18 +8,20 @@ return {
 		local api = require("nvim-tree.api")
 		require("nvim-tree").setup({
 			sort = {
-				sorter = "case_sensitive",
+				sorter = "filetype",
 			},
 			view = {
-				adaptive_size=true,
-				-- width = 35,
+				-- adaptive_size=true,
+				width = 35,
 				side = "left",
 				number = false,
 				relativenumber = true,
 				preserve_window_proportions = true,
 			},
 			renderer = {
-				-- root_folder_label = true,
+				root_folder_label = false,
+				full_name = true,
+				truncate_name = false,
 				group_empty = true,
 				highlight_git = true,
 				highlight_opened_files = "all",
