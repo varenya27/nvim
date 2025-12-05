@@ -10,9 +10,6 @@ vim.keymap.set({'n', 'x'}, 'gy', '"+y')
 vim.keymap.set({'n', 'x'}, 'gp', '"+p')
 vim.keymap.set('n', '<C-a>', ':keepjumps normal! ggVG<cr>', {desc = "select all"})
 
--- run python
-vim.keymap.set('n', '<leader>1', ':!python3 %<cr>')
-
 -- screen splits
 vim.keymap.set('n', '<leader>v', '<cmd>vsplit<cr>')
 vim.keymap.set('n', '<leader>s', '<cmd>split<cr>')
@@ -22,14 +19,25 @@ vim.keymap.set({'n','v'}, '<Up>', '3<C-y>')
 vim.keymap.set({'n','v'}, '<Down>', '3<C-e>')
 
 -- toggle window
-vim.keymap.set({'n','t'}, "<C-h>", "<C-w>h", { desc = "switch window left" })
-vim.keymap.set({'n','t'}, "<C-l>", "<C-w>l", { desc = "switch window right" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
+vim.keymap.set({'n'}, "<C-h>", "<C-w>h", { desc = "switch window left" })
+vim.keymap.set({'n'}, "<C-l>", "<C-w>l", { desc = "switch window right" })
+vim.keymap.set({'n'}, "<C-j>", "<C-w>j", { desc = "switch window down" })
+vim.keymap.set({'n'}, "<C-k>", "<C-w>k", { desc = "switch window up" })
+
+vim.keymap.set({'t'}, "<C-h>", "<C-\\><C-N><C-w>h", { desc = "exit term & switch window left" })
+vim.keymap.set({'t'}, "<C-l>", "<C-\\><C-N><C-w>l", { desc = "exit term & switch window right" })
+vim.keymap.set({'t'}, "<C-j>", "<C-\\><C-N><C-w>j", { desc = "exit term & switch window down" })
+vim.keymap.set({'t'}, "<C-k>", "<C-\\><C-N><C-w>k", { desc = "exit term & switch window up" })
 
 -- code commenting
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 vim.keymap.set("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
+
+-- show error floating block
+
+vim.keymap.set("n", "<M-e>", function()
+    vim.diagnostic.open_float()
+end, { silent = true })
 
 -- terminal stuff
 local terminal_window = nil
@@ -73,7 +81,7 @@ vim.keymap.set({"n"},"<leader>2", function ()
 		local file_dir = vim.fn.expand("%:p:h")
 		local file_extension = vim.fn.expand("%:e")
 		if file_extension ~= "py" then
-			print('only works for python files sorry')
+			print('only works for python files, sorry')
 			return
 		end
 		local cmd = 'cd ' .. file_dir .. '&& python ' .. file_path
@@ -84,6 +92,8 @@ vim.keymap.set({"n"},"<leader>2", function ()
 		terminal_active = true
 		local row,col = unpack(vim.api.nvim_win_get_cursor(terminal_window))
 		vim.api.nvim_buf_set_text(0,row-1,col-1,row-1,col-1,{cmd})
+	else
+		print('could not find terminal!')
 	end
 end,
 	{desc="run python code"})

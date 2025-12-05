@@ -21,7 +21,6 @@ return {
 			renderer = {
 				root_folder_label = false,
 				full_name = true,
-				truncate_name = false,
 				group_empty = true,
 				highlight_git = true,
 				highlight_opened_files = "all",
