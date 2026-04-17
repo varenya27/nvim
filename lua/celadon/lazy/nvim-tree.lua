@@ -11,7 +11,7 @@ return {
 				sorter = "filetype",
 			},
 			view = {
-				-- adaptive_size=true,
+				adaptive_size=false,
 				width = 35,
 				side = "left",
 				number = false,
@@ -22,7 +22,7 @@ return {
 				root_folder_label = false,
 				full_name = true,
 				group_empty = true,
-				highlight_git = true,
+				highlight_git = false,
 				highlight_opened_files = "all",
 				indent_markers = {
 					enable = true,
@@ -37,11 +37,11 @@ return {
 				},
 			},
 			filters = {
-				dotfiles = false,
+				dotfiles = true,
 				custom = {".git"}
 			},
 			git = {
-				enable = true,
+				enable = false,
 				ignore = false,
 				timeout = 500,
 			},

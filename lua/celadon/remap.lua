@@ -8,7 +8,7 @@ vim.keymap.set('n', '<leader>h', ':qa<cr>')
 vim.keymap.set({'n', 'x', 'v'}, '<leader>y', ':OSCYank<CR>')
 vim.keymap.set({'n', 'x'}, 'gy', '"+y')
 vim.keymap.set({'n', 'x'}, 'gp', '"+p')
-vim.keymap.set('n', '<C-a>', ':keepjumps normal! ggVG<cr>', {desc = "select all"})
+vim.keymap.set('n', '<M-a>', ':keepjumps normal! ggVG<cr>', {desc = "select all"})
 
 -- screen splits
 vim.keymap.set('n', '<leader>v', '<cmd>vsplit<cr>')
@@ -24,17 +24,23 @@ vim.keymap.set({'n'}, "<C-l>", "<C-w>l", { desc = "switch window right" })
 vim.keymap.set({'n'}, "<C-j>", "<C-w>j", { desc = "switch window down" })
 vim.keymap.set({'n'}, "<C-k>", "<C-w>k", { desc = "switch window up" })
 
+
 vim.keymap.set({'t'}, "<C-h>", "<C-\\><C-N><C-w>h", { desc = "exit term & switch window left" })
 vim.keymap.set({'t'}, "<C-l>", "<C-\\><C-N><C-w>l", { desc = "exit term & switch window right" })
 vim.keymap.set({'t'}, "<C-j>", "<C-\\><C-N><C-w>j", { desc = "exit term & switch window down" })
 vim.keymap.set({'t'}, "<C-k>", "<C-\\><C-N><C-w>k", { desc = "exit term & switch window up" })
+
+-- resize windows
+vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<A-j>", ":resize +2<CR>")
+vim.keymap.set("n", "<A-k>", ":resize -2<CR>")
 
 -- code commenting
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 vim.keymap.set("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 -- show error floating block
-
 vim.keymap.set("n", "<M-e>", function()
     vim.diagnostic.open_float()
 end, { silent = true })
@@ -71,7 +77,7 @@ vim.keymap.set({"n","t"}, "<A-t>", function ()
 		terminal_active = true
 	end
 end, { noremap = true, silent = true, desc = "open terminal" })
-vim.keymap.set("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
+vim.keymap.set("t", "<C-;>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 vim.keymap.set("t", "<C-q>", "<C-\\><C-N><cmd>quit<cr>")
 
 -- run python code in current open terminal 
@@ -120,15 +126,21 @@ vim.keymap.set("n", "<leader>pd", function() require("persistence").stop() end)
 local function run_python_in_terminal()
 	-- Get absolute path of current buffer file
 	local filepath = vim.fn.expand("%:p")
-
+	if not(filepath:sub(-2) == "py") then
+		print("Not a Python file!")
+		return
+	end
+	
 	-- Look for an existing terminal buffer
 	local term_buf = nil
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		print(_,buf)
 		if vim.bo[buf].buftype == "terminal" then
 			term_buf = buf
 			break
 		end
 	end
+	print('term_buf',term_buf)
 
 	if not term_buf then
 		print("No terminal buffer found!")
@@ -137,15 +149,29 @@ local function run_python_in_terminal()
 
 	-- Get the job id for the terminal buffer
 	local job_id = vim.b[term_buf].terminal_job_id
+	print('job_id',job_id)
 	if not job_id then
 		print("Terminal buffer has no job attached")
 		return
 	end
 
-	-- Send the run command
+	-- write and send the run command
+	-- vim.cmd("write")
 	vim.fn.chansend(job_id, "cd " .. vim.fn.expand("%:p:h") .. " && python3 " .. filepath .. "\n")
 end
 
 -- Map Ctrl+Enter in normal mode
 vim.keymap.set("n", "<C-CR>", run_python_in_terminal, { noremap = true, silent = true })
 
+-- Yank current diagnostic to clipboard
+vim.keymap.set("n", "<M-y>", function()
+    local line = vim.api.nvim_win_get_cursor(0)[1] - 1  -- 0-indexed
+    local diags = vim.diagnostic.get(0, { lnum = line })
+    if #diags > 0 then
+        local msg = diags[1].message  -- first diagnostic on the line
+        vim.fn.setreg("+", msg)      -- copy to system clipboard
+        print("Diagnostic copied: " .. msg)
+    else
+        print("No diagnostic on this line")
+    end
+end, { desc = "Yank current diagnostic" })

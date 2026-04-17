@@ -46,8 +46,8 @@ return {
 			vim.api.nvim_create_autocmd("BufWritePost", {
 				pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif" },
 				callback = function()
-					image.clear()
-					image.display()
+					require("image").clear()
+					require("image").display()
 				end,
 			}),
 

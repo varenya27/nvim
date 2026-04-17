@@ -89,6 +89,24 @@ return {
 		-- iron also has a list of commands, see :h iron-commands for all available commands
 		vim.keymap.set('n', '<space>rf', '<cmd>IronFocus<cr>')
 		vim.keymap.set('n', '<space>rh', '<cmd>IronHide<cr>')
+		vim.keymap.set("n", "<leader>ri", function()
+			local job = vim.b.terminal_job_id
+			require("iron.core").repl_for("python").job_id = job
+		end)
+		local function send_to_existing_terminal(lines)
+			local job = vim.g.compute_term_job_id
+			vim.fn.chansend(job, table.concat(lines, "\n") .. "\n")
+		end
+
+		vim.keymap.set("n", "<leader>rt", function()
+			vim.g.compute_term_job_id = vim.b.terminal_job_id
+		end)
+
+		vim.keymap.set("n", "<leader>rs", function()
+			local lines = vim.api.nvim_buf_get_lines(0, vim.fn.line("'<")-1, vim.fn.line("'>"), false)
+			send_to_existing_terminal(lines)
+		end, { silent = true })
+
 
 	end
 }
