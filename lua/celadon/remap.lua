@@ -118,51 +118,6 @@ vim.keymap.set("n", "<leader>pl", function() require("persistence").load({ last 
 vim.keymap.set("n", "<leader>pd", function() require("persistence").stop() end)
 
 
-
-
-
-
--- Function to send the current Python file to an existing terminal
-local function run_python_in_terminal()
-	-- Get absolute path of current buffer file
-	local filepath = vim.fn.expand("%:p")
-	if not(filepath:sub(-2) == "py") then
-		print("Not a Python file!")
-		return
-	end
-	
-	-- Look for an existing terminal buffer
-	local term_buf = nil
-	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		print(_,buf)
-		if vim.bo[buf].buftype == "terminal" then
-			term_buf = buf
-			break
-		end
-	end
-	print('term_buf',term_buf)
-
-	if not term_buf then
-		print("No terminal buffer found!")
-		return
-	end
-
-	-- Get the job id for the terminal buffer
-	local job_id = vim.b[term_buf].terminal_job_id
-	print('job_id',job_id)
-	if not job_id then
-		print("Terminal buffer has no job attached")
-		return
-	end
-
-	-- write and send the run command
-	-- vim.cmd("write")
-	vim.fn.chansend(job_id, "cd " .. vim.fn.expand("%:p:h") .. " && python3 " .. filepath .. "\n")
-end
-
--- Map Ctrl+Enter in normal mode
-vim.keymap.set("n", "<C-CR>", run_python_in_terminal, { noremap = true, silent = true })
-
 -- Yank current diagnostic to clipboard
 vim.keymap.set("n", "<M-y>", function()
     local line = vim.api.nvim_win_get_cursor(0)[1] - 1  -- 0-indexed

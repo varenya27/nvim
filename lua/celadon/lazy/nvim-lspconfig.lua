@@ -32,12 +32,12 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = { "lua_ls", "pyright", "bashls", "clangd", "rust_analyzer" },
 			handlers = {
-				function(server_name)
-					local opts = { capabilities = capabilities }
-					if server_name == "lua_ls" then
-						opts.settings = {
+				["lua_ls"] = function()
+					require("lspconfig").lua_ls.setup({
+						capabilities = capabilities,
+						settings = {
 							Lua = {
-								runtime = { version = "Lua 5.1" },
+								runtime = { version = "LuaJIT" },
 								diagnostics = {
 									globals = { "vim", "bit", "it", "describe", "before_each", "after_each" },
 								},
@@ -45,24 +45,24 @@ return {
 									checkThirdParty = false,
 								},
 							},
-						}
-					elseif server_name == "pyright" then
-						opts.settings = {
+						},
+					})
+				end,
+				["pyright"] = function()
+					require("lspconfig").pyright.setup({
+						capabilities = capabilities,
+						settings = {
 							python = {
 								analysis = {
 									autoSearchPaths = true,
 									diagnosticMode = "workspace",
 									useLibraryCodeForTypes = true,
 									typeCheckingMode = "basic",
-									diagnosticSeverityOverrides = {
-										reportAttributeAccessIssue = "warning",
-									},
 								},
 							},
-						}
-					end
-					require("lspconfig")[server_name].setup(opts)
-				end
+						},
+					})
+				end,
 			},
 		})
 
@@ -84,7 +84,6 @@ return {
 		})
 
 		vim.diagnostic.config({
-			-- update_in_insert = true,
 			float = {
 				focusable = false,
 				style = "minimal",
