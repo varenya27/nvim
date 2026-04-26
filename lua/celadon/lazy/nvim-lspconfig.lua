@@ -34,7 +34,8 @@ return {
 				"bashls",
 				"pyright",
 				"clangd",
-                "rust_analyzer",
+				"ltex_plus"
+                -- "rust_analyzer",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
