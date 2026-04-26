@@ -104,20 +104,6 @@ vim.keymap.set({"n"},"<leader>2", function ()
 end,
 	{desc="run python code"})
 
--- persistence mappings
--- load the session for the current directory
-vim.keymap.set("n", "<leader>ps", function() require("persistence").load() end)
-
--- select a session to load
-vim.keymap.set("n", "<leader>pS", function() require("persistence").select() end)
-
--- load the last session
-vim.keymap.set("n", "<leader>pl", function() require("persistence").load({ last = true }) end)
-
--- stop Persistence => session won't be saved on exit
-vim.keymap.set("n", "<leader>pd", function() require("persistence").stop() end)
-
-
 -- Yank current diagnostic to clipboard
 vim.keymap.set("n", "<M-y>", function()
     local line = vim.api.nvim_win_get_cursor(0)[1] - 1  -- 0-indexed

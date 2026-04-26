@@ -9,6 +9,7 @@ return {
 		explorer = {
 			enabled = false,
 			git = { enabled = false },
+			preview = { enabled = false },
 		},
 		indent = { enabled = false },
 		input = { enabled = true },
@@ -18,6 +19,7 @@ return {
 		},
 		picker = { enabled = true,
 			git = {enabled = false}
+
 		},
 		quickfile = { enabled = true },
 		scope = { enabled = true },
@@ -34,6 +36,17 @@ return {
 				dim = false,
 			}
 
+		},
+		image = {
+			enabled = true,
+			backend = "kitty",
+			-- Whether to show images inline in the editor
+			inline = false,
+			-- Clear images when switching buffers
+			clear_on_buf_leave = true,
+			-- File patterns to enable image preview for
+			pattern = "*.png,*.jpg,*.jpeg,*.gif,*.webp",
+			watch = true,
 		}
 	},
 	keys = {
@@ -43,7 +56,7 @@ return {
 		{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
 		{ "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-		-- { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+		{ "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 		-- find
 		{ "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
