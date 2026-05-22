@@ -45,6 +45,10 @@ vim.keymap.set("n", "<M-e>", function()
     vim.diagnostic.open_float()
 end, { silent = true })
 
+-- diff
+vim.keymap.set("n", "<leader>d", ":diffthis<CR>")
+vim.keymap.set("n", "<leader>D", ":diffoff<CR>")
+
 -- terminal stuff
 local terminal_window = nil
 local terminal_active = false
@@ -77,32 +81,8 @@ vim.keymap.set({"n","t"}, "<A-t>", function ()
 		terminal_active = true
 	end
 end, { noremap = true, silent = true, desc = "open terminal" })
-vim.keymap.set("t", "<C-;>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
+vim.keymap.set("t", "<M-;>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 vim.keymap.set("t", "<C-q>", "<C-\\><C-N><cmd>quit<cr>")
-
--- run python code in current open terminal 
-vim.keymap.set({"n"},"<leader>2", function ()
-	if terminal_window and not terminal_active then
-		local file_path = vim.fn.expand("%:p")
-		local file_dir = vim.fn.expand("%:p:h")
-		local file_extension = vim.fn.expand("%:e")
-		if file_extension ~= "py" then
-			print('only works for python files, sorry')
-			return
-		end
-		local cmd = 'cd ' .. file_dir .. '&& python ' .. file_path
-		cmd = 'ls'
-		vim.api.nvim_win_set_height(terminal_window, math.floor(vim.o.lines * 0.3))
-		vim.api.nvim_set_current_win(terminal_window)
-		vim.cmd('startinsert')
-		terminal_active = true
-		local row,col = unpack(vim.api.nvim_win_get_cursor(terminal_window))
-		vim.api.nvim_buf_set_text(0,row-1,col-1,row-1,col-1,{cmd})
-	else
-		print('could not find terminal!')
-	end
-end,
-	{desc="run python code"})
 
 -- Yank current diagnostic to clipboard
 vim.keymap.set("n", "<M-y>", function()

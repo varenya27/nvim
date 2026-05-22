@@ -107,8 +107,11 @@ vim.keymap.set("n", "<C-CR>", function ()
 			vim.fn.chansend(terminal, "cd " .. vim.fn.expand("%:p:h") .. " && python3 " .. vim.fn.expand("%:p") .. "\n")
 		end
 		print('Running ' .. vim.fn.expand("%"))
+
+	elseif ext=='.sh' then
+			vim.fn.chansend(terminal, "cd " .. vim.fn.expand("%:p:h") .. " && bash " .. vim.fn.expand("%:p") .. "\n")
 	else
-		print('Python files only for now')
+		print('Python/bash files only for now')
 	end
 end, { noremap = true, silent = true })
 

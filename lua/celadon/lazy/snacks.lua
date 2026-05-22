@@ -37,17 +37,16 @@ return {
 			}
 
 		},
-		image = {
-			enabled = true,
-			backend = "kitty",
-			-- Whether to show images inline in the editor
-			inline = false,
-			-- Clear images when switching buffers
-			clear_on_buf_leave = true,
-			-- File patterns to enable image preview for
-			pattern = "*.png,*.jpg,*.jpeg,*.gif,*.webp",
-			watch = true,
-		}
+		-- image = {
+		-- 	enabled = true,
+		-- 	backend = "kitty",
+		-- 	-- Whether to show images inline in the editor
+		-- 	inline = false,
+		-- 	-- Clear images when switching buffers
+		-- 	clear_on_buf_leave = true,
+		-- 	-- File patterns to enable image preview for
+		-- 	pattern = "*.png,*.jpg,*.jpeg,*.gif,*.webp",
+		-- }
 	},
 	keys = {
 		-- Top Pickers & Explorer
