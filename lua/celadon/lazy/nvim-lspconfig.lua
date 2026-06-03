@@ -27,22 +27,22 @@ return {
 			cmp_lsp.default_capabilities())
 
         require("fidget").setup({})
-        require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-				"bashls",
-				"pyright",
-				"clangd",
-				"ltex_plus"
-                -- "rust_analyzer",
-            },
-            handlers = {
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
+				--     require("mason").setup()
+				--     require("mason-lspconfig").setup({
+				--         ensure_installed = {
+				--             "lua_ls",
+				-- "bashls",
+				-- "pyright",
+				-- "clangd",
+				-- "ltex_plus"
+				--             -- "rust_analyzer",
+				--         },
+				--         handlers = {
+				--             function(server_name) -- default handler (optional)
+				--                 require("lspconfig")[server_name].setup {
+				--                     capabilities = capabilities
+				--                 }
+				--             end,
 
 		require("mason").setup()
 		require("mason-lspconfig").setup({
@@ -69,6 +69,7 @@ return {
 						capabilities = capabilities,
 						settings = {
 							python = {
+								pythonPath = "/work/pi_vvarma_umassd_edu/vupadhyaya_umassd_edu/.conda/envs/igwn/bin/python",
 								analysis = {
 									autoSearchPaths = true,
 									diagnosticMode = "workspace",
